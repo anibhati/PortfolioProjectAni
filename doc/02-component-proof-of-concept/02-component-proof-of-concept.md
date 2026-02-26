@@ -1,8 +1,8 @@
 # Portfolio Part 2: Component Proof-of-Concept
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment --> Aniruddha Sinh Bhati
+- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment --> bhati.27
+- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment --> 02/26 @ 4:10 PM EST
 
 ## Assignment Overview
 
@@ -29,8 +29,6 @@ Because this may ultimately be something you want to share with employers,
 the more work you can put in now, the better.
 
 ## Assignment Checklist
-
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -73,7 +71,7 @@ project. Specifically, students should be able to:
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
 are meant to provide ongoing feedback in the learning process. Therefore,
-the rubric is designed to assess the learning objectives *directly* in a way
+the rubric is designed to assess the learning objectives _directly_ in a way
 that is low stakes—meaning you shouldn't have to worry about the grade. Just
 do good work.
 
@@ -116,6 +114,8 @@ Below is further rationale/explanation for the rubric items above:
 
 <!-- TODO: briefly argue your choice of design or design something
 new; then delete this comment -->
+
+I chose to move forward with the DialogTree component for this task. The Neuron design was very interesting and complex and if I could complete it, the project would be really cool and it aligns with my interest in machine learning. But it would require very complex activation functions that would be way too difficult to fit with OSU discipline with my current skill level. The DataStructure design was too vague and very common. It just recreates components like Set and doesn't create anything interesting. DialogTree was the best choice because the kernel stays small and simple like navigating the tree, adding responses, and reading dialogue, the secondary methods build naturally on top of those kernel methods, and the component has a clear real-world use such as in games and chatbots that makes it easy to demonstrate value. It is also a good fit for where I am in learning since the internal representation is just a recursive node structure that is straightforward to implement and later adapt to the OSU discipline.
 
 > Once you've argued your choice of design, make a branch in your new repo called
 > something like `proof-of-concept`. There are many ways to do this, but my
@@ -172,15 +172,14 @@ the following form: YYYY.0M.0D.
 
 ### Added
 
-- Designed a proof of concept for <!-- insert name of component here --> component
+- Designed a proof of concept for the Dialog Tree component
 
 ### Updated
 
 - Changed design to include ...
-
 ```
 
-Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
+Here 2026.02/26 would be the date of your submission, such as 2024.04.21.
 
 You may notice that things are nicely linked in the root CHANGELOG. If you'd
 like to accomplish that, you will need to make GitHub releases after each pull
