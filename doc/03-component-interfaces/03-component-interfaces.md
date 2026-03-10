@@ -1,8 +1,8 @@
 # Portfolio Part 3: Component Interfaces
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Aniruddha Bhati
+- **Dot Number**: bhati.27
+- **Due Date**: 03/10 @ 4:10 PM EST
 
 ## Assignment Overview
 
@@ -83,7 +83,7 @@ project. Specifically, students should be able to:
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
 are meant to provide ongoing feedback in the learning process. Therefore,
-the rubric is designed to assess the learning objectives *directly* in a way
+the rubric is designed to assess the learning objectives _directly_ in a way
 that is low stakes—meaning you shouldn't have to worry about the grade. Just
 do good work.
 
@@ -134,6 +134,8 @@ of it in this folder. You may also embed it just below using markdown syntax
 
 <!-- TODO: make a diagram of your component hierarchy then delete this comment -->
 
+![DialogTree Component Hierarchy](Hierarchy.jpg)
+
 To start making your interfaces, make a branch off of main in your new repo
 called something like `interfaces`. There are many ways to do this, but my
 preference is to use GitHub Desktop. From there, you can click the `Branch`
@@ -153,8 +155,6 @@ merges, you will need to pull the changes from main into your current branch
 to see them. If you don't like this workflow, you may try following the
 rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
-
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
@@ -192,16 +192,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2025.03.10
 
 ### Added
 
-- Designed kernel and enhanced interfaces for <!-- insert name of component here --> component
+- Designed kernel and enhanced interfaces for 'DialogTree' component
 
 ### Updated
 
-- Changed design to include ...
-
+- Changed design to include Changed kernel method name from `setRootDialogue(Node root)` to
+  `addResponse(String dialogue)` — the original design exposed internal `Node`
+  types to the client, which violates information hiding
+- Changed `getCurrentResponse()` to `getCurrentDialogue()` to better reflect
+  that the method returns a `String` of text, not a `Node` object
+- Moved `getAvailableResponses()` from the kernel to the enhanced interface,
+  since it can be implemented using kernel methods alone
+- Renamed `isAChild()` to `isLeaf()` — the original name was misleading;
+  `isLeaf` correctly describes a node with no children
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
@@ -211,8 +218,6 @@ like to accomplish that, you will need to make GitHub releases after each pull
 request merge (or at least tag your commits). This is not required.
 
 ### Submission
-
-<!-- TODO: read the submission instructions then delete this comment -->
 
 Assuming that your project is in a GitHub repo somewhere and your changes are on
 a proof-of-concept branch, then what we'll want you to do is create a pull
@@ -250,11 +255,11 @@ markdown as HTML or a PDF to read this rubric as a table).
 
 | Criteria of Constructive Feedback | Missing | Developing | Meeting |
 | --------------------------------- | ------- | ---------- |v ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Specific                          | All feedback is general (not specific)                                                                                            | Some (but not all) feedback is specific and some examples may be provided.                                                                                                                                                                | All feedback is specific, with examples provided where possible                                                                                                       |
-| Actionable                        | None of the feedback provides actionable items or suggestions for improvement                                                     | Some feedback provides suggestions for improvement, while some do not                                                                                                                                                                     | All (or nearly all) feedback is actionable; most criticisms are followed by suggestions for improvement                                                               |
-| Prioritized                       | Feedback provides only major or minor concerns, but not both. Major and minar concerns are not labeled or feedback is unorganized | Feedback provides both major and minor concerns, but it is not clear which is which and/or the feedback is not as well organized as it could be                                                                                           | Feedback clearly labels major and minor concerns. Feedback is organized in a way that allows the reader to easily understand which points to prioritize in a revision |
-| Balanced                          | Feedback describes either strengths or areas of improvement, but not both                                                         | Feedback describes both strengths and areas for improvement, but it is more heavily weighted towards one or the other, and/or descusses both but does not clearly identify which part of the feedback is a strength/area for improvement  | Feedback provides balanced discussion of the document's strengths and areas for improvement. It is clear which piece of feedback is which                             |
-| Tactful                           | Overall tone and language are not appropriate (e.g., not considerate, could be interpreted as personal criticism or attack)       | Overall feedback tone and language are general positive, tactul, and non-threatening, but one or more feedback comments could be interpretted as not tactful and/or feedback leans toward personal criticism, not focused on the document | Feedback tone and language are positive, tactful, and non-threatening. Feedback addesses the document, not the writer                                                 |
+| Specific | All feedback is general (not specific) | Some (but not all) feedback is specific and some examples may be provided. | All feedback is specific, with examples provided where possible |
+| Actionable | None of the feedback provides actionable items or suggestions for improvement | Some feedback provides suggestions for improvement, while some do not | All (or nearly all) feedback is actionable; most criticisms are followed by suggestions for improvement |
+| Prioritized | Feedback provides only major or minor concerns, but not both. Major and minar concerns are not labeled or feedback is unorganized | Feedback provides both major and minor concerns, but it is not clear which is which and/or the feedback is not as well organized as it could be | Feedback clearly labels major and minor concerns. Feedback is organized in a way that allows the reader to easily understand which points to prioritize in a revision |
+| Balanced | Feedback describes either strengths or areas of improvement, but not both | Feedback describes both strengths and areas for improvement, but it is more heavily weighted towards one or the other, and/or descusses both but does not clearly identify which part of the feedback is a strength/area for improvement | Feedback provides balanced discussion of the document's strengths and areas for improvement. It is clear which piece of feedback is which |
+| Tactful | Overall tone and language are not appropriate (e.g., not considerate, could be interpreted as personal criticism or attack) | Overall feedback tone and language are general positive, tactul, and non-threatening, but one or more feedback comments could be interpretted as not tactful and/or feedback leans toward personal criticism, not focused on the document | Feedback tone and language are positive, tactful, and non-threatening. Feedback addesses the document, not the writer |
 
 ### Assignment Feedback
 
