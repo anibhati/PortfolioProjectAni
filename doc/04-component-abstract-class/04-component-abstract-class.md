@@ -157,7 +157,16 @@ completed the assignment.
 
 ### Changelog
 
-<!-- TODO: update CHANGELOG then delete this comment -->
+## 2025.04.01
+
+### Added
+
+- Designed abstract class for DialogTree component
+
+### Updated
+
+- Identified missing kernel methods needed for full implementation
+  (setCurrentDialogue, deleteChild)
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -176,11 +185,12 @@ the following form: YYYY.0M.0D.
 
 ### Added
 
-- Designed abstract class for <!-- insert name of component here --> component
+- Designed abstract class for DialogTree component
 
 ### Updated
 
-- Changed design to include ...
+Identified missing kernel methods needed for full implementation
+(setCurrentDialogue, deleteChild)
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
