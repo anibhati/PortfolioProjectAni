@@ -40,8 +40,6 @@ examples of these.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
-
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
 opening the TODOs window from the sidebar. The icon looks like a tree and will
@@ -79,7 +77,7 @@ project. Specifically, students should be able to:
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
 are meant to provide ongoing feedback in the learning process. Therefore,
-the rubric is designed to assess the learning objectives *directly* in a way
+the rubric is designed to assess the learning objectives _directly_ in a way
 that is low stakes—meaning you shouldn't have to worry about the grade. Just
 do good work.
 
@@ -120,7 +118,10 @@ Below is further rationale/explanation for the rubric items above:
 > discuss how that representation will be restricted (i.e., by convention)
 > and interpreted (i.e., by correspondence).
 
-<!-- TODO: select a representation and explain why -->
+I decided to go with a linked node structure for this tree. I made a private Node class that has a String for the dialogue and a List to hold all the child nodes.
+
+Why I chose this:
+It just makes sense for a tree. Since a tree is basically nodes pointing to other nodes, this structure matches the math perfectly. It makes the code really fast—moving to a child or counting responses is O(1) because you're just looking at a list. It's way easier to wrap my head around than trying to force everything into a flat array or a hash map.
 
 > To start making your kernel implementation, make a branch off of main in your
 > new repo called something like `kernel-implementation`. There are many ways to
@@ -142,8 +143,6 @@ Below is further rationale/explanation for the rubric items above:
 > rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 > and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
 
-<!-- TODO: make a new branch from main then delete this comment -->
-
 ## Assignment Tasks
 
 Your primary task for this assignment is to create a kernel implementation that
@@ -163,7 +162,21 @@ completed the assignment.
 
 ### Changelog
 
-<!-- TODO: update CHANGELOG then delete this comment -->
+Markdown
+
+## 2026.04.15
+
+### Added
+
+- Finished the DialogTree1L kernel implementation.
+- Used a Node class with a List of children to build the tree.
+- Added Javadoc comments to all fields and methods to fix Checkstyle errors.
+
+### Fixed
+
+- Marked the class as final to fix the "Design for Extension" warning.
+- Removed the accidental XML Node import that kept popping up.
+- Fixed assertions to follow the kernel purity rule.
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -187,7 +200,6 @@ the following form: YYYY.0M.0D.
 ### Updated
 
 - Changed design to include ...
-
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
