@@ -3,65 +3,58 @@ import java.util.List;
 
 /**
  * Abstract class for the DialogTree component. Implements all secondary methods
- * using only kernel methods.
+ * using only kernel methods. This class has no instance fields — all state is
+ * derived entirely from kernel calls.
  *
  * @author Aniruddha Singh Bhati
  */
 public abstract class DialogTreeSecondary implements DialogTree {
 
     /**
-     * Tracks the path of child indices taken from the root to the cursor.
-     * Updated whenever moveToResponse is called. Not part of the tree
-     * representation used to track cursor position.
+     * Prime multiplier used in hashCode computation.
      */
-    protected List<Integer> path = new ArrayList<>();
+    private static final int HASH_MULTIPLIER = 31;
 
-    /**
-     * Navigates the cursor to the node described by the given path, starting
-     * from the root. Uses Standard methods newInstance and transferFrom to
-     * reset to root first.
-     *
-     * @param targetPath
-     *            list of child indices from root to target
+    /*
+     * Secondary methods implemented using only kernel methods. No instance
+     * fields are used.
      */
-    private void navigateToPath(List<Integer> targetPath) {
-        DialogTree fresh = this.newInstance();
-        fresh.transferFrom(this);
-        for (int step : targetPath) {
-            fresh.moveToResponse(step);
-        }
-        this.transferFrom(fresh);
-        this.path = new ArrayList<>(targetPath);
-    }
 
     @Override
     public void reset() {
         /*
-         * Navigate back to the root by renavigating to an empty path, which
-         * corresponds to the root node.
+         * Walk up to the root using moveToParent(). isAtRoot() tells us when to
+         * stop. No precondition needed — isAtRoot() is always callable.
          */
-        this.navigateToPath(new ArrayList<>());
+        while (!this.isAtRoot()) {
+            this.moveToParent();
+        }
     }
 
     @Override
     public boolean isLeaf() {
+        /*
+         * A node is a leaf if it has no children. numberOfResponses() has no
+         * precondition so it is safe to call directly.
+         */
         return this.numberOfResponses() == 0;
     }
 
     @Override
     public List<String> getAvailableResponses() {
+        /*
+         * For each child index, move down, record the dialogue, then move back
+         * up. The cursor returns to its original position after the loop.
+         */
         int n = this.numberOfResponses();
         List<String> responses = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
+            assert 0 <= i && i < this
+                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
             this.moveToResponse(i);
             responses.add(this.getCurrentDialogue());
-
-            // Go back to the parent node
-            List<Integer> parentPath = new ArrayList<>(
-                    this.path.subList(0, this.path.size() - 1));
-            this.path.add(i);
-            this.navigateToPath(parentPath);
+            this.moveToParent();
         }
 
         return responses;
@@ -72,16 +65,10 @@ public abstract class DialogTreeSecondary implements DialogTree {
         assert newDialogue != null : "Violation of: newDialogue /= null";
 
         /*
-         * This method cannot be fully implemented using only kernel methods.
-         * The kernel has no setCurrentDialogue method, so there is no way to
-         * change the dialogue of a node without rebuilding the entire subtree.
-         * A setCurrentDialogue(String) method should be added to the kernel.
-         *
-         * For now this throws UnsupportedOperationException to signal the gap.
+         * Delegate directly to the kernel method setCurrentDialogue, which was
+         * added to the kernel specifically to support this operation.
          */
-        throw new UnsupportedOperationException(
-                "editCurrentDialogue requires a kernel method "
-                        + "setCurrentDialogue(String) which does not exist yet.");
+        this.setCurrentDialogue(newDialogue);
     }
 
     @Override
@@ -90,41 +77,48 @@ public abstract class DialogTreeSecondary implements DialogTree {
                 .numberOfResponses() : "Violation of: 0 <= choice < this.numberOfResponses()";
 
         /*
-         * This method cannot be fully implemented using only kernel methods.
-         * The kernel has no way to delete a child node. A deleteChild(int) or
-         * clearChildren() method should be added to the kernel.
-         *
-         * For now this throws UnsupportedOperationException to signal the gap.
+         * Delegate directly to the kernel method removeResponseAt, which was
+         * added to the kernel specifically to support this operation.
          */
-        throw new UnsupportedOperationException(
-                "removeResponse requires a kernel method deleteChild(int) "
-                        + "which does not exist yet.");
+        this.removeResponseAt(choice);
     }
 
     @Override
     public int depthOfCursor() {
         /*
-         * The path list holds one entry per edge from root to cursor, so its
-         * size is the depth.
+         * Walk up to the root counting steps, then walk back down to restore
+         * the cursor. We record the indices taken while going up so we can
+         * retrace them in reverse order.
          */
-        return this.path.size();
-    }
+        List<Integer> indices = new ArrayList<>();
 
-    @Override
-    public boolean isAtRoot() {
-        return this.path.isEmpty();
+        while (!this.isAtRoot()) {
+            indices.add(this.indexInParent());
+            this.moveToParent();
+        }
+
+        // Restore cursor to original position
+        for (int i = indices.size() - 1; i >= 0; i--) {
+            int idx = indices.get(i);
+            assert 0 <= idx && idx < this
+                    .numberOfResponses() : "Violation of: 0 <= idx < this.numberOfResponses()";
+            this.moveToResponse(idx);
+        }
+
+        return indices.size();
     }
 
     /*
-     * Common Object methods implemented using only kernel methods.
+     * Object methods implemented using only kernel methods.
      */
 
     /**
-     * Returns a string representation of the dialog tree from the current
-     * cursor position. Each node is indented based on its depth and shows its
-     * dialogue text.
+     * Returns a string representation of the dialog tree rooted at the current
+     * cursor position. Each node is indented by its depth relative to the
+     * starting node and shows its dialogue text. The cursor is restored to its
+     * original position after the call.
      *
-     * @return string representation of this dialog tree
+     * @return string representation of this dialog tree from the cursor
      */
     @Override
     public String toString() {
@@ -134,15 +128,16 @@ public abstract class DialogTreeSecondary implements DialogTree {
     }
 
     /**
-     * Helper for toString. Recursively visits each child and appends to sb.
+     * Recursive helper for toString. Visits every child subtree by moving down
+     * and back up, using only kernel methods.
      *
      * @param sb
      *            the StringBuilder being built
      * @param depth
-     *            current depth from the starting node
+     *            depth of the current node relative to the toString root
      */
     private void toStringHelper(StringBuilder sb, int depth) {
-        // Add indentation
+        // Indent based on depth
         for (int i = 0; i < depth; i++) {
             sb.append("  ");
         }
@@ -156,16 +151,11 @@ public abstract class DialogTreeSecondary implements DialogTree {
 
         int n = this.numberOfResponses();
         for (int i = 0; i < n; i++) {
+            assert 0 <= i && i < this
+                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
             this.moveToResponse(i);
-            this.path.add(i);
-
             this.toStringHelper(sb, depth + 1);
-
-            // Go back to this node
-            List<Integer> here = new ArrayList<>(
-                    this.path.subList(0, this.path.size() - 1));
-            this.path.remove(this.path.size() - 1);
-            this.navigateToPath(here);
+            this.moveToParent();
         }
     }
 
@@ -173,11 +163,14 @@ public abstract class DialogTreeSecondary implements DialogTree {
      * Returns true if {@code obj} is a DialogTree with the same structure and
      * dialogue strings as this one, compared from both cursors. Two trees are
      * equal if their current dialogue matches, they have the same number of
-     * responses, and each child subtree is equal recursively.
+     * responses, and each child subtree is recursively equal.
+     *
+     * The cursor of this tree is restored to its original position after the
+     * call. The cursor of {@code obj} is also restored.
      *
      * @param obj
      *            the object to compare with
-     * @return true if obj is an equal DialogTree
+     * @return true if obj is a structurally equal DialogTree
      */
     @Override
     public boolean equals(Object obj) {
@@ -193,14 +186,15 @@ public abstract class DialogTreeSecondary implements DialogTree {
 
     /**
      * Recursive helper for equals. Compares this tree and other from their
-     * current cursor positions using only kernel methods.
+     * current cursor positions using only kernel methods. Both cursors are
+     * restored to their original positions after the call.
      *
      * @param other
      *            the other DialogTree to compare
-     * @return true if both subtrees are identical
+     * @return true if both subtrees are structurally identical
      */
     private boolean equalsHelper(DialogTree other) {
-        // Check dialogue at current node
+        // Dialogues at current positions must match
         if (!this.getCurrentDialogue().equals(other.getCurrentDialogue())) {
             return false;
         }
@@ -211,23 +205,19 @@ public abstract class DialogTreeSecondary implements DialogTree {
         }
 
         for (int i = 0; i < n; i++) {
+            assert 0 <= i && i < this
+                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
+            assert 0 <= i && i < other
+                    .numberOfResponses() : "Violation of: 0 <= i < other.numberOfResponses()";
+
             this.moveToResponse(i);
-            this.path.add(i);
             other.moveToResponse(i);
 
             boolean childEqual = this.equalsHelper(other);
 
-            // Return this cursor to parent
-            List<Integer> parentPath = new ArrayList<>(
-                    this.path.subList(0, this.path.size() - 1));
-            this.path.remove(this.path.size() - 1);
-            this.navigateToPath(parentPath);
-
-            // Return other cursor to parent
-            other.reset();
-            for (int step : parentPath) {
-                other.moveToResponse(step);
-            }
+            // Restore both cursors to this level
+            this.moveToParent();
+            other.moveToParent();
 
             if (!childEqual) {
                 return false;
@@ -238,15 +228,16 @@ public abstract class DialogTreeSecondary implements DialogTree {
     }
 
     /**
-     * Returns a hash code consistent with equals, derived from the current
-     * node's dialogue and number of responses.
+     * Returns a hash code consistent with equals, based on the current node's
+     * dialogue and number of responses.
      *
-     * @return hash code for this dialog tree
+     * @return hash code for this dialog tree node
      */
     @Override
     public int hashCode() {
         int result = this.getCurrentDialogue().hashCode();
-        result = 31 * result + this.numberOfResponses();
+        result = HASH_MULTIPLIER * result + this.numberOfResponses();
         return result;
     }
+
 }
