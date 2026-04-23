@@ -181,16 +181,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2026.04.23
 
 ### Added
 
-- Designed abstract class for DialogTree component
+- Added moveToParent(), indexInParent(), setCurrentDialogue(String),
+  and removeResponseAt(int) to DialogTreeKernel
+- Added parent field to Node in DialogTree1L to support upward traversal
 
 ### Updated
 
-Identified missing kernel methods needed for full implementation
-(setCurrentDialogue, deleteChild)
+- Moved isAtRoot() to DialogTreeKernel
+- Rewrote DialogTreeSecondary to be fully stateless using only kernel methods
+- Implemented editCurrentDialogue and removeResponse using new kernel methods
+- Removed path field from DialogTree1L and DialogTreeSecondary
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
