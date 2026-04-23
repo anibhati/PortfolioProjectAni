@@ -65,12 +65,4 @@ public interface DialogTree extends DialogTreeKernel {
      */
     int depthOfCursor();
 
-    /**
-     * Returns true if the cursor is at the root node.
-     *
-     * @return true if cursor is at root, false otherwise
-     * @ensures isAtRoot = (this.cursor = this.root)
-     */
-    boolean isAtRoot();
-
 }

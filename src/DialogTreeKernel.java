@@ -51,12 +51,60 @@ public interface DialogTreeKernel extends Standard<DialogTree> {
     void moveToResponse(int choice);
 
     /**
+     * Moves the cursor to the parent of the current node.
+     *
+     * @updates this.cursor
+     * @requires this.cursor /= this.root
+     * @ensures this.cursor.children[indexInParent()] = #this.cursor
+     */
+    void moveToParent();
+
+    /**
+     * Returns the index of the current node within its parent's children list.
+     *
+     * @return the index i such that parent.children[i] = this.cursor
+     * @requires this.cursor /= this.root
+     * @ensures parent.children[indexInParent()] = this.cursor
+     */
+    int indexInParent();
+
+    /**
+     * Returns true if the cursor is at the root node.
+     *
+     * @return true if cursor is at root, false otherwise
+     * @ensures isAtRoot = (this.cursor = this.root)
+     */
+    boolean isAtRoot();
+
+    /**
      * Returns the dialogue text at the current cursor position.
      *
      * @return the dialogue string of the current node
      * @ensures getCurrentDialogue = this.cursor.dialogue
      */
     String getCurrentDialogue();
+
+    /**
+     * Replaces the dialogue text at the current node with the given string.
+     *
+     * @param newDialogue
+     *            the new dialogue text to set
+     * @updates this.cursor.dialogue
+     * @requires newDialogue /= null
+     * @ensures this.cursor.dialogue = newDialogue
+     */
+    void setCurrentDialogue(String newDialogue);
+
+    /**
+     * Removes the response at the given index from the current node.
+     *
+     * @param choice
+     *            the index of the response to remove
+     * @updates this.cursor.children
+     * @requires 0 <= choice < this.numberOfResponses()
+     * @ensures |this.cursor.children| = |#this.cursor.children| - 1
+     */
+    void removeResponseAt(int choice);
 
     /**
      * Returns the number of responses available at the current node.
