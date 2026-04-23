@@ -25,8 +25,8 @@ import org.w3c.dom.Node;
  * <li>{@code dialogue} in any Node is never null</li>
  * <li>{@code children} list in any Node is never null</li>
  * <li>There are no cycles in the structure</li>
- * <li>{@code path} correctly reflects the sequence of indices to get from
- * {@code root} to {@code cursor}</li>
+ * <li>{@code parent} of root is null; {@code parent} of every other node points
+ * to its direct parent</li>
  * </ul>
  *
  * <p>
@@ -34,7 +34,7 @@ import org.w3c.dom.Node;
  * </p>
  * <ul>
  * <li>this = [the tree rooted at this.root, with the current position defined
- * by this.cursor and tracked by this.path]</li>
+ * by this.cursor]</li>
  * <li>the dialogue at a node = node.dialogue</li>
  * <li>the available responses = node.children</li>
  * </ul>
@@ -58,11 +58,22 @@ public class DialogTree1L extends DialogTreeSecondary {
         private List<Node> children;
 
         /**
-         * Constructor for a new Node. @param dialogue the text for this node
+         * The parent of this node, or null if this is the root.
          */
-        private Node(String dialogue) {
+        private Node parent;
+
+        /**
+         * Constructor for a new Node.
+         *
+         * @param dialogue
+         *            the text for this node
+         * @param parent
+         *            the parent node, or null if root
+         */
+        private Node(String dialogue, Node parent) {
             this.dialogue = dialogue;
             this.children = new ArrayList<>();
+            this.parent = parent;
         }
     }
 
@@ -80,9 +91,8 @@ public class DialogTree1L extends DialogTreeSecondary {
      * Creates the initial representation of an empty tree.
      */
     private void createNewRep() {
-        this.root = new Node("");
+        this.root = new Node("", null);
         this.cursor = this.root;
-        this.path = new ArrayList<>();
     }
 
     /**
@@ -93,8 +103,10 @@ public class DialogTree1L extends DialogTreeSecondary {
     }
 
     /**
-     * Constructor with an initial opening line. @param opening the dialogue for
-     * the root node
+     * Constructor with an initial opening line.
+     *
+     * @param opening
+     *            the dialogue for the root node
      */
     public DialogTree1L(String opening) {
         assert opening != null : "Violation of: opening is not null";
@@ -106,7 +118,7 @@ public class DialogTree1L extends DialogTreeSecondary {
     public void addResponse(String dialogue) {
         assert dialogue != null : "Violation of: dialogue is not null";
 
-        Node newNode = new Node(dialogue);
+        Node newNode = new Node(dialogue, this.cursor);
         this.cursor.children.add(newNode);
     }
 
@@ -116,12 +128,45 @@ public class DialogTree1L extends DialogTreeSecondary {
                 .size() : "Violation of: 0 <= choice < numberOfResponses()";
 
         this.cursor = this.cursor.children.get(choice);
-        this.path.add(choice);
+    }
+
+    @Override
+    public void moveToParent() {
+        assert this.cursor != this.root : "Violation of: cursor /= root";
+
+        this.cursor = this.cursor.parent;
+    }
+
+    @Override
+    public int indexInParent() {
+        assert this.cursor != this.root : "Violation of: cursor /= root";
+
+        return this.cursor.parent.children.indexOf(this.cursor);
+    }
+
+    @Override
+    public boolean isAtRoot() {
+        return this.cursor == this.root;
     }
 
     @Override
     public String getCurrentDialogue() {
         return this.cursor.dialogue;
+    }
+
+    @Override
+    public void setCurrentDialogue(String newDialogue) {
+        assert newDialogue != null : "Violation of: newDialogue /= null";
+
+        this.cursor.dialogue = newDialogue;
+    }
+
+    @Override
+    public void removeResponseAt(int choice) {
+        assert 0 <= choice && choice < this.cursor.children
+                .size() : "Violation of: 0 <= choice < numberOfResponses()";
+
+        this.cursor.children.remove(choice);
     }
 
     @Override
@@ -148,7 +193,6 @@ public class DialogTree1L extends DialogTreeSecondary {
 
         this.root = localSource.root;
         this.cursor = localSource.cursor;
-        this.path = localSource.path;
 
         localSource.createNewRep();
     }
