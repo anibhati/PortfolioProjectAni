@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Abstract class for the DialogTree component. Implements all secondary methods
- * using only kernel methods. This class has no instance fields — all state is
- * derived entirely from kernel calls.
+ * Abstract class for the DialogTree component. Implements all secondary
+ * methods using only kernel methods. This class has no instance fields —
+ * all state is derived entirely from kernel calls.
  *
  * @author Aniruddha Singh Bhati
  */
@@ -16,15 +16,15 @@ public abstract class DialogTreeSecondary implements DialogTree {
     private static final int HASH_MULTIPLIER = 31;
 
     /*
-     * Secondary methods implemented using only kernel methods. No instance
-     * fields are used.
+     * Secondary methods implemented using only kernel methods.
+     * No instance fields are used.
      */
 
     @Override
     public void reset() {
         /*
-         * Walk up to the root using moveToParent(). isAtRoot() tells us when to
-         * stop. No precondition needed — isAtRoot() is always callable.
+         * Walk up to the root using moveToParent(). isAtRoot() tells us when
+         * to stop. No precondition needed — isAtRoot() is always callable.
          */
         while (!this.isAtRoot()) {
             this.moveToParent();
@@ -50,8 +50,7 @@ public abstract class DialogTreeSecondary implements DialogTree {
         List<String> responses = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            assert 0 <= i && i < this
-                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
+            assert 0 <= i && i < this.numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
             this.moveToResponse(i);
             responses.add(this.getCurrentDialogue());
             this.moveToParent();
@@ -65,8 +64,8 @@ public abstract class DialogTreeSecondary implements DialogTree {
         assert newDialogue != null : "Violation of: newDialogue /= null";
 
         /*
-         * Delegate directly to the kernel method setCurrentDialogue, which was
-         * added to the kernel specifically to support this operation.
+         * Delegate directly to the kernel method setCurrentDialogue, which
+         * was added to the kernel specifically to support this operation.
          */
         this.setCurrentDialogue(newDialogue);
     }
@@ -100,8 +99,7 @@ public abstract class DialogTreeSecondary implements DialogTree {
         // Restore cursor to original position
         for (int i = indices.size() - 1; i >= 0; i--) {
             int idx = indices.get(i);
-            assert 0 <= idx && idx < this
-                    .numberOfResponses() : "Violation of: 0 <= idx < this.numberOfResponses()";
+            assert 0 <= idx && idx < this.numberOfResponses() : "Violation of: 0 <= idx < this.numberOfResponses()";
             this.moveToResponse(idx);
         }
 
@@ -152,8 +150,7 @@ public abstract class DialogTreeSecondary implements DialogTree {
 
         int n = this.numberOfResponses();
         for (int i = 0; i < n; i++) {
-            assert 0 <= i && i < this
-                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
+            assert 0 <= i && i < this.numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
             this.moveToResponse(i);
             this.toStringHelper(sb, depth + 1);
             this.moveToParent();
@@ -186,10 +183,11 @@ public abstract class DialogTreeSecondary implements DialogTree {
     }
 
     /**
-     * Recursive helper for equals. A separate method is required because equals
-     * takes an Object parameter and cannot recurse directly with a DialogTree;
-     * this helper carries the correctly typed reference across recursive calls.
-     * Both cursors are restored to their original positions after the call.
+     * Recursive helper for equals. A separate method is required because
+     * equals takes an Object parameter and cannot recurse directly with a
+     * DialogTree; this helper carries the correctly typed reference across
+     * recursive calls. Both cursors are restored to their original positions
+     * after the call.
      *
      * @param other
      *            the other DialogTree to compare
@@ -207,10 +205,8 @@ public abstract class DialogTreeSecondary implements DialogTree {
         }
 
         for (int i = 0; i < n; i++) {
-            assert 0 <= i && i < this
-                    .numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
-            assert 0 <= i && i < other
-                    .numberOfResponses() : "Violation of: 0 <= i < other.numberOfResponses()";
+            assert 0 <= i && i < this.numberOfResponses() : "Violation of: 0 <= i < this.numberOfResponses()";
+            assert 0 <= i && i < other.numberOfResponses() : "Violation of: 0 <= i < other.numberOfResponses()";
 
             this.moveToResponse(i);
             other.moveToResponse(i);
