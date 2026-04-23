@@ -12,6 +12,24 @@ the following form: YYYY.0M.0D.
 - Fixed broken links
 - Disabled AI features globally
 
+[2026.04.23]
+Added
+
+Added moveToParent(), indexInParent(), setCurrentDialogue(String),
+and removeResponseAt(int) to DialogTreeKernel
+Added parent field to Node in DialogTree1L to support upward traversal
+
+Changed
+
+Moved isAtRoot() to DialogTreeKernel
+Rewrote DialogTreeSecondary to be fully stateless using only kernel methods
+Implemented editCurrentDialogue and removeResponse using new kernel methods
+Removed path field from DialogTree1L and DialogTreeSecondary
+
+Fixed
+
+Replaced magic number 31 in hashCode with named constant HASH_MULTIPLIER
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
