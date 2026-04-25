@@ -64,6 +64,19 @@ the following form: YYYY.0M.0D.
 - Removed `java.saveActions.organizeImports` setting from `settings.json`
 - Removed references to `Point3D` completely
 
+## 2026.04.24
+
+### Added
+
+- Designed test suite for DialogTree component
+- Designed two different use cases for DialogTree component
+
+### Updated
+
+- Changed design to include finishing touches such as use case demos and a test suite
+
+```
+
 ## [2024.01.07]
 
 ### Added
@@ -80,3 +93,4 @@ the following form: YYYY.0M.0D.
 [unreleased]: https://github.com/jrg94/portfolio-project/compare/v2024.08.07...HEAD
 [2024.08.07]: https://github.com/jrg94/portfolio-project/compare/v2024.01.07...v2024.08.07
 [2024.01.07]: https://github.com/jrg94/portfolio-project/releases/tag/v2024.01.07
+```
