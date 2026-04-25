@@ -200,13 +200,12 @@ will likely refine your design to make your implementation easier to use.
 - Component Design #1: <!-- TODO: give component a name then delete this comment --> Neuron
   - **Description**:
     - Represents a single artificial neuron in a network. This neuron maintains a collection of weighed inputs, and bias, and activation. It can compute output given input values and adjust bias and weight through learning. It models neural network behavior.
-  - **Kernel Methods**:
-    - void setBias(double bias) - sets bias value
-
-      ActivationFunction activationFunction() - returns the current activation function type
-
-      void setWeight(int index, double weight) - sets the weight at the specified index.
-
+  - - **Kernel Methods**:
+  - void setBias(double bias) - sets the bias value
+  - double getBias() - returns the current bias value so clients can retrieve it for calculations
+  - void setWeight(int index, double weight) - sets the weight at the specified index
+  - double getWeight(int index) - returns the weight at the specified index so clients can retrieve it
+  - int activationFunction() - returns an integer representing the current activation function type
   - ## **Secondary Methods**:
 
     double computeOutput(Sequence<Double> inputs)- computes and returns the neuron's output
@@ -232,10 +231,13 @@ will likely refine your design to make your implementation easier to use.
 - Component Design #2: Data Structure
   - **Description**:
     - Represents a container for organizing and storing different data types. Provides operations for inserting removing and getting elements and keeping organized.
+
   - ## **Kernel Methods**:
-    add(T element) - adds to data structure
-    remove(E element) - removes the specified element if it is there.
-    contains(E element) - checks whether specified element is there.
+  - add(T element) - adds an element to the data structure
+  - remove(E element) - removes the specified element if it is there
+  - contains(E element) - checks whether the specified element is there
+  - sizeOfStruct() - returns the number of elements in the structure
+
   - ## **Secondary Methods**:
 
     sizeOfStruct() - returns the number of elements in structure
