@@ -1,90 +1,91 @@
-# Portfolio Project
+# Dialogue Tree Component
 
-The purpose of this repo is to provide a framework for creating your own
-component in the software sequence discipline. If you were unsure whether
-or not to make your own, consider the following testimonial:
+> A custom Java software component built as part of the OSU Software Sequence portfolio project. This component provides a framework for building branching dialogue trees — useful for games, interactive fiction, and NPC conversation systems.
 
-> I really enjoyed the portfolio project! It gave me a stronger understanding
-> of the OSU software discipline while also giving me the flexibility to
-> design something that reflected my interests. This made the experience
-> rewarding and enjoyable as I created a product I was proud of!
+---
 
-## Recommended Steps to Get Started
+## What Is This?
 
-When starting your portfolio project, the following steps should make your life
-a bit easier.
+This repo contains a from-scratch implementation of a **Dialogue Tree** component, designed and built following the OSU software discipline. A dialogue tree lets you model branching conversations where each node holds a line of dialogue and a set of possible responses, each leading to a new node. It's the backbone of NPC interactions in games and choose-your-own-adventure style narratives.
+
+---
+
+## Getting Started
 
 ### Step 1: Create a Repo From This Template
 
-<!-- TODO: use GitHub to create a repo from this template -->
-
-Assuming you're reading this README from GitHub, you can make use of this
-repo by clicking the `Use this template` button in the top-right corner of
-this page. If you can't find the button, [this link][use-this-template] 
-should work as well. Personally, I would recommend using the 
-`Create a new repository` option, which will allow you to name the 
-repository after your component. Given that you will be submitting pull 
-requests to me through Carmen, you'll want to make sure your repository 
-is public. Then, you can click `Create repository`. After that, you can 
-go through all the usual steps of cloning a repository on your system to 
-get to work. I use GitHub Desktop to clone projects, and it has a nice 
-feature of letting you open a repo directly in VSCode from the 
-`Repository` menu.
+Click the **Use this template** button at the top-right of this page, or use [this direct link](https://github.com/new?template_name=portfolio-project&template_owner=jrg94). Choose **Create a new repository**, name it after your component, and make sure it's set to **public** (required for Carmen submissions). Then clone it locally — [GitHub Desktop](https://desktop.github.com/) works great and lets you open the repo directly in VSCode from the `Repository` menu.
 
 ### Step 2: Install Recommended Plugins
 
-<!-- TODO: install recommended plugins and delete this comment -->
-
-When you open VSCode with this project, you should get a notification in the
-bottom right corner that there are some recommended extensions to install.
-Click install all. If you ignored this message or it never came up, feel free
-to press CTRL+SHIFT+P and type "Show Recommended Extensions". Install all of the
-extensions listed.
+Open the project in VSCode and click **Install All** when prompted about recommended extensions. If you missed the prompt, press `CTRL+SHIFT+P` and search for **"Show Recommended Extensions"**, then install everything listed.
 
 ### Step 3: Install the Latest JDK
 
-<!-- TODO: install latest JDK and delete this comment -->
+If you don't have a JDK on your system, VSCode may prompt you to install one. Skip the Red Hat option (no Mac support, requires account registration) and install the latest JDK directly from [Oracle's site](https://www.oracle.com/java/technologies/downloads/).
 
-If you do not have an available JDK on your system, you may be prompted to
-install one by VSCode. The default seems to be Red Hat's OpenJDK, which seems to
-require you to register for an account or to install on the command line.
-Regardless, there is no mac support. As a result, I would just recommend
-installing the latest JDK [directly from Oracle's site][jdk-downloads].
+### Step 4: Add Key Libraries
 
-### Step 4: Add Key Libraries to Project
+**Components JAR** — Download `components.jar` from [here](https://cse22x1.engineering.osu.edu/common/components.jar) and drop it into the `lib/` folder. Git ignores this folder by default, so no need to commit it.
 
-<!-- TODO: add key libraries to project and delete this comment -->
+**JUnit** — Click the beaker icon in the VSCode sidebar (below the Extensions icon). If it's not visible, try creating a Java file in `src/` first. Then click **Enable Java Tests → JUnit**. The two JUnit libraries will appear in `lib/` automatically.
 
-As you are probably all aware at this point, you need the components jar to get
-anything running. My advice is to [download it from here][components-jar]. Then,
-drop it into the `lib` folder in the project. Git automatically ignores anything
-you put here by default, so don't worry about committing it to version control.
+> **Note:** If you're used to the monorepo template where libraries were already included — that's intentional here. Committing binaries is generally bad practice, and this setup shows you how to manage dependencies from scratch. If you get stuck, copy the `lib/` folder from the monorepo template.
 
-Similarly, you will need the testing APIs (e.g., JUnit). Perhaps the easiest way
-to include them in your project is to click the beaker symbol in the left
-sidebar; it's right below the extensions button which looks like four squares.
-If you do not see this button, try creating a Java file in `src`. From there, 
-you can click "Enable Java Tests" and then click "JUnit" from the
-dropdown. That's it! You should now see the two JUnit libraries in the lib
-folder.
+---
 
-**Note**: if you're using VSCode for class projects, you might be wondering
-why you never had to do this. In general, it's bad practice to commit binaries
-to version control. However, we have no way of managing dependencies with the
-custom `components.jar`, so I included them directly in the template. I did not
-include them here, so you could see how it might be done from scratch. If at any
-point you're struggling with Step 3, just copy the lib folder from the monorepo
-template.
+## Project Structure
 
-## Next Steps
+```
+.
+├── src/                  # Component source files
+├── test/                 # JUnit test files
+├── lib/                  # Local dependencies (gitignored)
+├── doc/                  # Assignment documentation and specs
+└── README.md
+```
 
-<!-- TODO: navigate to part 1 of the portfolio project and delete this comment -->
+---
 
-Now that you have everything setup, you can begin crafting your component. There
-will be deadlines for each step in Carmen, but you're free to complete each step
-as early as you'd like. To start, you'll want to visit the [doc](doc/) directory
-for each assignment file.
+## Assignment Checkpoints
 
-[components-jar]: https://cse22x1.engineering.osu.edu/common/components.jar
-[jdk-downloads]: https://www.oracle.com/java/technologies/downloads/
-[use-this-template]: https://github.com/new?template_name=portfolio-project&template_owner=jrg94
+All assignment files and specs live in the [`doc/`](./doc) directory. There are deadlines for each step on Carmen, but you're free to work ahead. Each step has its own branch in this repo:
+
+| Step | Branch | Description |
+|------|--------|-------------|
+| 1 | [`Component-Interface`](../../tree/Component-Interface) | Define the abstract model and kernel methods |
+| 2 | [`proof-of-concept`](../../tree/proof-of-concept) | Sketch a rough implementation to validate your design |
+| 3 | [`abstract-class`](../../tree/abstract-class) | Implement secondary methods on top of the kernel |
+| 4 | [`kernel-implementation`](../../tree/kernel-implementation) | Build the concrete data representation |
+| 5 | [`finishing-touches`](../../tree/finishing-touches) | Polish, testing, and final cleanup |
+
+---
+
+## Usage Example
+
+```java
+// Build a simple dialogue tree
+DialogueTree tree = new DialogueTree1();
+tree.addNode("start", "Hello, traveler. What brings you here?");
+tree.addChoice("start", "I seek the ancient artifact.", "quest");
+tree.addChoice("start", "Just passing through.", "goodbye");
+
+tree.addNode("quest", "Brave soul! The artifact lies in the eastern dungeon.");
+tree.addNode("goodbye", "Safe travels then.");
+
+// Traverse
+String current = "start";
+System.out.println(tree.getDialogue(current));
+// → "Hello, traveler. What brings you here?"
+```
+
+> **Note:** API details may vary depending on your final kernel design. Update this example once your interface is finalized.
+
+---
+
+## Resources
+
+- [OSU Components Javadoc](https://cse22x1.engineering.osu.edu/common/doc/)
+- [Oracle JDK Downloads](https://www.oracle.com/java/technologies/downloads/)
+- [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
+- [Project Template](https://github.com/jrg94/portfolio-project)
