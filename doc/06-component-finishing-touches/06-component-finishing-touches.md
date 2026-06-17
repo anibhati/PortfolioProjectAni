@@ -1,8 +1,8 @@
 # Portfolio Part 6: Finishing Touches
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Aniruddha Bhati
+- **Dot Number**: bhati.27
+- **Due Date**: 04/24 @ 11:59 PM EST
 
 ## Assignment Overview
 
@@ -49,8 +49,6 @@ Many of these additional techniques are somewhat out of the scope of this
 course, but just knowing about them could set you up for long term success.
 
 ## Assignment Checklist
-
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -140,8 +138,6 @@ merges, you will need to pull the changes from main into your current branch
 to see them. If you don't like this workflow, you may try following the
 rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
-
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
@@ -307,18 +303,18 @@ Take some time to fill them out honestly.
 > complete the portfolio project, how much better (or worse) do you think you
 > understand software development and why?
 
-<!-- TODO: discuss -->
+This project made software development feel real. In other classes you're given a problem with a clear right answer, but here I had to make actual design decisions that were complicated. Figuring out which methods belonged in the kernel versus the abstract class, or how to write a correspondence that actually captured what my personal component does, is giving me job experience.
 
 > Also, did the portfolio project surface any gaps in your own knowledge of
 > software development. If so, what are those gaps and how did you address them?
 
-<!-- TODO: discuss -->
+The biggest thing I noticed was that I didn't really know how to think about abstraction before I actually had to design one myself. I kept adding things to the kernel that probably shouldn't have been there, and it took a while to develop those skills. I also learned to make javadoc comments before coding which helped.
 
 > Finally, as a part of completing the portfolio project, to what extent has
 > your perspective of software development changed, if at all? In other words,
 > is software development something you still enjoy? If not, why not?
 
-<!-- TODO: discuss -->
+I still enjoy it, maybe more than before. What changed is I stopped thinking of coding as just solving puzzles and started seeing it as a design problem, how you structure code matters as much as whether it runs. There was a moment when I finished the use case demos and everything worked exactly as I'd designed it to, and that felt genuinely satisfying in a way finishing a homework problem usually doesn't.
 
 > One of the challenges of completing the portfolio project is picking up a lot
 > of skills on your own. Some of these skills are, of course, software skills.
@@ -326,25 +322,28 @@ Take some time to fill them out honestly.
 > this process. Therefore, the first question is what skills did you pick up
 > through this process?
 
-<!-- TODO: discuss -->
+On the technical side I got more comfortable with tree structures, writing real test plans, and thinking through what a clean API looks like. Beyond that, I got better at sitting with uncertainty, there were a lot of moments where I wasn't sure if my design was right and had to make a call anyway. I also got better at breaking a big assignment into smaller pieces I could actually make progress on.
 
 > The follow-up question is: could you rephrase these skills you picked up
 > as bullet points that you could put on a resume? Try it below.
 
-<!-- TODO: discuss -->
+Designed and implemented a custom Java component using a layered kernel/abstract-class/interface architecture
+Wrote formal API contracts, representation invariants, and abstraction functions
+Built a JUnit test suite covering kernel and secondary methods with edge case coverage
+Managed a multi-week open-ended project independently from design through testing
 
 > Next, how has working on this project affected your career trajectory?
 > In other words, do you now hate the topic you picked? Or, are you even more
 > interested in it? Both outcomes are valuable to your personal development.
 
-<!-- TODO: discuss -->
+I picked dialog trees because I've always found branching dialogue in games interesting, and this made me more curious about how those systems are actually built. While working on the demos I ended up looking into tools like Ink and Yarn Spinner and kind of got sucked in.
 
 > Finally, consider the skills you've picked up and your current career
 > trajectory. What are some things you could do to continue on your
 > career trajectory? Also, who are some mentors you could contact to help
 > you stay on your path?
 
-<!-- TODO: discuss -->
+The most obvious next step is building something small with my DialogTree component, a short text game, just to see how the API holds up in practice. I also want to look into how Ink or Yarn Spinner work under the hood and maybe contribute something small to get a taste of open-source work. For mentors, I'd start with professors here who have game development backgrounds, and look into whether OSU has a game dev community I could connect with.
 
 ### Changelog
 
@@ -363,17 +362,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2026.04.24
 
 ### Added
 
-- Designed test suite for <!-- insert name of component here --> component
-- Designed two different use cases for <!-- insert name of component here --> component
+- Designed test suite for DialogTree component
+- Designed two different use cases for DialogTree component
 
 ### Updated
 
-- Changed design to include ...
-
+- Changed design to include finishing touches such as use case demos and a test suite
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
