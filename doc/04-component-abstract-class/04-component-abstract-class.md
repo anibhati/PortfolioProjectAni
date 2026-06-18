@@ -1,8 +1,8 @@
 # Portfolio Part 4: Abstract Class
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Aniruddha Singh Bhati
+- **Dot Number**: bhati.27
+- **Due Date**: 04/01 @ 4:10 PM EST
 
 ## Assignment Overview
 
@@ -86,7 +86,7 @@ project. Specifically, students should be able to:
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
 are meant to provide ongoing feedback in the learning process. Therefore,
-the rubric is designed to assess the learning objectives *directly* in a way
+the rubric is designed to assess the learning objectives _directly_ in a way
 that is low stakes—meaning you shouldn't have to worry about the grade. Just
 do good work.
 
@@ -157,7 +157,16 @@ completed the assignment.
 
 ### Changelog
 
-<!-- TODO: update CHANGELOG then delete this comment -->
+## 2025.04.01
+
+### Added
+
+- Designed abstract class for DialogTree component
+
+### Updated
+
+- Identified missing kernel methods needed for full implementation
+  (setCurrentDialogue, deleteChild)
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -172,16 +181,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2026.04.23
 
 ### Added
 
-- Designed abstract class for <!-- insert name of component here --> component
+- Added moveToParent(), indexInParent(), setCurrentDialogue(String),
+  and removeResponseAt(int) to DialogTreeKernel
+- Added parent field to Node in DialogTree1L to support upward traversal
 
 ### Updated
 
-- Changed design to include ...
-
+- Moved isAtRoot() to DialogTreeKernel
+- Rewrote DialogTreeSecondary to be fully stateless using only kernel methods
+- Implemented editCurrentDialogue and removeResponse using new kernel methods
+- Removed path field from DialogTree1L and DialogTreeSecondary
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.

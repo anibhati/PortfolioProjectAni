@@ -12,6 +12,73 @@ the following form: YYYY.0M.0D.
 - Fixed broken links
 - Disabled AI features globally
 
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Calendar Versioning](https://calver.org/) of
+the following form: YYYY.0M.0D.
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Calendar Versioning](https://calver.org/) of
+the following form: YYYY.0M.0D.
+
+## 2026.04.23
+
+### Added
+
+- Added moveToParent(), indexInParent(), setCurrentDialogue(String),
+  and removeResponseAt(int) to DialogTreeKernel
+- Added parent field to Node in DialogTree1L to support upward traversal
+
+### Updated
+
+- Moved isAtRoot() to DialogTreeKernel
+- Rewrote DialogTreeSecondary to be fully stateless using only kernel methods
+- Implemented editCurrentDialogue and removeResponse using new kernel methods
+- Removed path field from DialogTree1L and DialogTreeSecondary
+
+## 2025.04.01
+
+### Added
+
+- Designed abstract class for DialogTree component
+
+### Updated
+
+- Identified missing kernel methods needed for full implementation
+  (setCurrentDialogue, deleteChild)
+
+## 2025.03.10
+
+### Added
+
+- Designed kernel and enhanced interfaces for the `DialogTree` component
+- Created `DialogTreeKernel.java` with four minimal kernel methods:
+  `addResponse`, `moveToResponse`, `getCurrentDialogue`, and `numberOfResponses`
+- Created `DialogTree.java` (enhanced interface) with seven secondary methods:
+  `reset`, `isLeaf`, `getAvailableResponses`, `editCurrentDialogue`,
+  `removeResponse`, `depthOfCursor`, and `isAtRoot`
+- Added component hierarchy diagram showing where both interfaces fit in the
+  OSU software sequence discipline
+
+### Updated
+
+- Changed kernel method name from `setRootDialogue(Node root)` to
+  `addResponse(String dialogue)` — the original design exposed internal `Node`
+  types to the client
+- Changed `getCurrentResponse()` to `getCurrentDialogue()` to better describe
+  that the method returns a `String` of text, not a `Node` object
+- Moved `getAvailableResponses()` from the kernel to the enhanced interface,
+  since it can be implemented using kernel methods alone
+- Renamed `isAChild()` to `isLeaf()` because the original name was misleading;
+  `isLeaf` correctly describes a node with no children
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
